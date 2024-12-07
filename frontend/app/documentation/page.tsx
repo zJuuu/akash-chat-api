@@ -85,6 +85,9 @@ export default async function Documentation() {
               <tr>
                 <td className="border px-4 py-2">nvidia-Llama-3-1-Nemotron-70B-Instruct-HF</td>
               </tr>
+              <tr>
+                <td className="border px-4 py-2">Meta-Llama-3-3-70B-Instruct</td>
+              </tr>
             </tbody>
           </table>
         </div>
