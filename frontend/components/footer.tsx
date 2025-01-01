@@ -33,7 +33,7 @@ export default function Footer() {
       </div>
       <div className="container mx-auto px-4 mt-4 border-t border-muted-foreground pt-4 text-sm text-muted-foreground flex flex-col md:flex-row justify-between items-center">
         <p className="md:text-left">
-          © Akash Network 2024 | The Akash Network Authors Documentation Distributed under CC BY 4.0 | Open-source
+          © Akash Network 2025 | The Akash Network Authors Documentation Distributed under CC BY 4.0 | Open-source
           Apache 2.0 Licensed.
         </p>
         <div className="flex space-x-4 mt-4 md:mt-0 md:justify-end">
