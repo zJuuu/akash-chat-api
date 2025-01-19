@@ -1,0 +1,18 @@
+# See https://docs.litellm.ai/docs/proxy/configs for more information
+general_settings:
+  proxy_batch_write_at: 60 # Batch write spend updates every 60s
+  database_connection_pool_limit: 10 # limit the number of database connections to = MAX Number of DB Connections/Number of instances of litellm proxy (Around 10-20 is good number)
+
+litellm_settings:
+  set_verbose: False      # Switch off Debug Logging, ensure your logs do not have any debugging on
+  json_logs: true         # Get debug logs in json format
+  cache: True
+  cache_params:
+    type: redis
+    host: redis
+    port: 6379
+  
+router_settings:
+  routing_strategy: usage-based-routing-v2 
+  redis_host: redis
+  redis_port: 6379

@@ -1,0 +1,159 @@
+---
+version: "2.0"
+services:
+  chatapi-fe:
+    image: yourfedockerimage
+    expose:
+      - port: 3000
+        as: 8000
+        to:
+          - global: true
+    env:
+      - "MONGODB_URI=mongodb://<MONGODB_USER>:<MONGODB_PASSWORD>@mongodb:27017/"
+      - "LITELLM_API_ENDPOINT=http://chat-litellm:4000"
+      - "LITELLM_ADMIN_KEY=<LITELLM_ADMIN_KEY>"
+      - "LITELLM_USER_ROLE=internal_user_viewer"
+      - "LITELLM_MAX_PARALLEL_REQUESTS=3"
+      - "LITELLM_TEAM_ID=<LITELLM_TEAM_ID>"
+  pg:
+    image: postgres:16
+    expose:
+      - port: 5432
+        as: 5432
+        to:
+          - global: true
+          - service: chat-litellm
+    env:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=<POSTGRES_USER>
+      - POSTGRES_PASSWORD=<POSTGRES_PASSWORD>
+      - POSTGRES_DB=litellm
+    params:
+      storage:
+        data:
+          mount: /var/lib/postgresql/data
+          readOnly: false
+  chat-litellm:
+    image: ghcr.io/berriai/litellm-database:litellm_stable_nov12-v1.52.5-stable
+    expose:
+      - port: 4000
+        as: 4000
+        to:
+          - global: true
+          - service: chatapi-fe
+    command:
+      - bash
+      - "-c"
+    args:
+      - >-
+        apt update; apt install wget -y;
+        wget https://<LINKTOCONFIG>/config.yaml -O /config.yaml; 
+        litellm --port 4000 --config /config.yaml
+    env:
+      - LITELLM_MASTER_KEY=<LITELLM_MASTER_KEY>
+      - DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@postgres:5432/litellm
+      - STORE_MODEL_IN_DB=True
+  redis:
+    image: redislabs/redismod
+    expose:
+      - port: 6379
+        as: 6379
+        to:
+          - global: false
+          - service: chat-litellm
+  mongodb:
+    image: mongo:latest 
+    expose:
+      - port: 27017 
+        to:
+          - service: chatapi-fe
+    env:
+      - MONGO_INITDB_ROOT_USERNAME=<MONGODB_USER>
+      - MONGO_INITDB_ROOT_PASSWORD=<MONGODB_PASSWORD>
+
+profiles:
+  compute:
+    pg:
+      resources:
+        cpu:
+          units: 6
+        memory:
+          size: 8Gi
+        storage:
+          - size: 25Gi
+          - name: data
+            size: 25Gi
+            attributes:
+              persistent: true
+              class: beta3
+    chat-litellm:
+      resources:
+        cpu:
+          units: 12
+        memory:
+          size: 16Gi
+        storage:
+          - size: 50Gi
+    redis:
+      resources:
+        cpu:
+          units: 5
+        memory:
+          size: 16Gi
+        storage:
+          - size: 10Gi
+    chatapi-fe:
+      resources:
+        cpu:
+          units: 2
+        memory:
+          size: 4Gi
+        storage:
+          - size: 10Gi
+    mongodb:
+      resources:
+        cpu:
+          units: 2.0
+        memory:
+          size: 8Gi
+        storage:
+          size: 8Gi
+  placement:
+    akash:
+      pricing:
+        pg:
+          denom: uakt
+          amount: 1000
+        chat-litellm:
+          denom: uakt
+          amount: 1000
+        redis:
+          denom: uakt
+          amount: 1000
+        chatapi-fe:
+          denom: uakt
+          amount: 1000
+        mongodb:
+          denom: uakt
+          amount: 1000
+deployment:
+  pg:
+    akash:
+      profile: pg
+      count: 1
+  chat-litellm:
+    akash:
+      profile: chat-litellm
+      count: 1
+  redis:
+    akash:
+      profile: redis
+      count: 1
+  chatapi-fe:
+    akash:
+      profile: chatapi-fe
+      count: 1
+  mongodb:
+    akash:
+      profile: mongodb
+      count: 1
