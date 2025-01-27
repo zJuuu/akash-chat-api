@@ -58,11 +58,11 @@ export default async function Documentation() {
       </div>
 
       <div>
-        If you need help or have questions, please reach out to us in the Akash Discord at: 
+        If you need help or have questions, please reach out to us in the Akash Discord at:
         <br />
         <a href="https://discord.com/invite/akash">https://discord.com/invite/akash</a>
       </div>
-      
+
       <div>
         <h4 className="text-2xl font-bold">Available Models</h4>
         <div>
@@ -73,6 +73,27 @@ export default async function Documentation() {
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Llama-70B</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Llama-8B</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Qwen-1.5B</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Qwen-14B</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Qwen-32B</td>
+              </tr>
+              <tr>
+                <td className="border px-4 py-2">DeepSeek-R1-Distill-Qwen-7B</td>
+              </tr>
               <tr>
                 <td className="border px-4 py-2">Meta-Llama-3-1-8B-Instruct-FP8</td>
               </tr>
@@ -95,11 +116,11 @@ export default async function Documentation() {
 
       <div>
         <h4 className="text-2xl font-bold">Example: With Python and the OpenAI SDK</h4>
-        <Code code={exampleCode} codeStyle={customStyle as any}/>
+        <Code code={exampleCode} codeStyle={customStyle as any} />
       </div>
       <div>
         <h4 className="text-2xl font-bold">Example: With Curl and Python</h4>
-        <Code code={exampleCurl} codeStyle={customStyle as any}/>
+        <Code code={exampleCurl} codeStyle={customStyle as any} />
       </div>
     </div>
   );

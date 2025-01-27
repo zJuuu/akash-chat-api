@@ -87,7 +87,7 @@ export default function Index() {
                 Akash Chat API
               </h1>
               <p className="max-w-[600px] text-lg md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Welcome to the Akash Chat API, an open and permissionless Llama3.1 API powered by the Akash Supercloud that anyone can access at completely zero-cost.
+                Welcome to the Akash Chat API, an open and permissionless LLaMA & DeepSeek API powered by the Akash Supercloud that anyone can access at completely zero-cost.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link
