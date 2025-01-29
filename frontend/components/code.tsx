@@ -1,50 +1,68 @@
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+SyntaxHighlighter.registerLanguage('python', python);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('bash', bash);
 
 interface CodeProps {
   code: string;
-  codeStyle: any;
 }
 
-export default function Code({ code, codeStyle }: CodeProps) {
-  const [copied, setCopied] = useState(false);
+export default function Code({ code }: CodeProps) {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 390);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const getLanguage = () => {
+    if (code.includes('curl')) return 'bash';
+    if (code.includes('import axios')) return 'javascript';
+    return 'python';
   };
 
   return (
-    <div className="relative group">
-      <button
-        onClick={handleCopy}
-        className="absolute right-2 top-2 p-2 rounded-lg bg-gray-800/10 hover:bg-gray-800/20 transition-colors opacity-0 group-hover:opacity-100"
-        aria-label="Copy code"
+    <div className="overflow-hidden">
+      <SyntaxHighlighter
+        language={getLanguage()}
+        style={atomOneDark}
+        customStyle={{
+          padding: isSmallScreen ? '0.5rem' : '0.75rem',
+          margin: 0,
+          fontSize: isSmallScreen ? '11px' : '12px',
+          lineHeight: isSmallScreen ? '16px' : '18px',
+          maxWidth: '100%',
+          wordBreak: 'break-word',
+          backgroundColor: '#18181B',
+          borderRadius: 0,
+        }}
+        showLineNumbers={true}
+        lineNumberStyle={{
+          minWidth: isSmallScreen ? '1.5em' : '2em',
+          paddingRight: '0.5em',
+          fontSize: 'inherit',
+          lineHeight: 'inherit',
+          opacity: 0.5,
+          userSelect: 'none',
+          color: '#6272A4',
+          textAlign: 'right',
+          marginRight: '0.5em',
+          borderRight: '1px solid #27272A'
+        }}
       >
-        {copied ? (
-          <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        ) : (
-          <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-          </svg>
-        )}
-      </button>
-      
-      <div onClick={(e) => e.stopPropagation()} className="select-text">
-        <SyntaxHighlighter
-          style={codeStyle}
-          customStyle={{
-            padding: '1rem',
-            borderRadius: '0.5rem',
-            margin: 0,
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
-      </div>
+        {code}
+      </SyntaxHighlighter>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react"
 import GetKey from "../components/get-key"
 import z from 'zod'
 import { Input } from "@/components/ui/input"
-import { CheckCircle2, CopyCheck, CopyIcon } from "lucide-react"
+import { CheckCircle2, CopyCheck, CopyIcon, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import CopyToClipboard from "react-copy-to-clipboard"
 
@@ -22,6 +22,12 @@ export default function Index() {
   const [step, setStep] = useState(0);
   const [apiKey, setApiKey] = useState('');
   const [isCopied, setCopied] = useState(false);
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
 
   async function handleSubmit(e: FormEvent): Promise<boolean | undefined> {
     e.preventDefault()
@@ -119,40 +125,66 @@ export default function Index() {
           </div>
         </section>
       )}
-      {step === 1 && <GetKey handleSubmit={handleSubmit} />}
+      {step === 1 && (
+        <div className="container flex flex-col items-center justify-center min-h-screen py-6 md:py-18">
+          <div className="w-full max-w-lg">
+            <Button
+              variant="ghost"
+              onClick={handleBack}
+              className="mb-4 -ml-2 flex items-center gap-2 text-gray-600 hover:text-gray-900"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </Button>
+            <GetKey handleSubmit={handleSubmit} />
+          </div>
+        </div>
+      )}
       {step === 2 && (
-        <Card className="w-full max-w-lg 2xl:max-w-3xl">
-          <CardHeader>
-            <CardTitle>
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-10 h-10 text-[#4BB543]" />
-                <span>Your API Key was generated successfully.</span>
-              </div>
-            </CardTitle>
-            <CardDescription>
-              Please keep it safe and secure.
-              <br />
-              Learn how to get started with the <u><Link target="_blank" href="/documentation">Akash Chat API guide</Link></u>.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <p className="font-medium">Your API Key is:</p>
-              <div className="flex items-center space-x-2">
-                <Input type="text" value={apiKey} readOnly className="pr-10" />
-                <CopyToClipboard
-                  onCopy={handleCopy}
-                  text={apiKey}
-                >
-                  <Button onClick={handleCopy} variant="ghost" size="icon" aria-label="Copy to Clipboard Button" className="right-2">
-                    {isCopied ? <CopyCheck className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
-                  </Button>
-                </CopyToClipboard>
-              </div>
-              <p className="text-sm text-muted-foreground">Inactive API keys will be revoked after 30 days.</p>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="container flex flex-col items-center justify-center min-h-screen py-6">
+          <div className="w-full max-w-lg 2xl:max-w-3xl">
+            <Button
+              variant="ghost"
+              onClick={handleBack}
+              className="mb-4 -ml-2 flex items-center gap-2 text-gray-600 hover:text-gray-900"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </Button>
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle2 className="w-10 h-10 text-[#4BB543]" />
+                    <span>Your API Key was generated successfully.</span>
+                  </div>
+                </CardTitle>
+                <CardDescription>
+                  Please keep it safe and secure.
+                  <br />
+                  Learn how to get started with the <u><Link target="_blank" href="/documentation">Akash Chat API guide</Link></u>.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <p className="font-medium">Your API Key is:</p>
+                  <div className="flex items-center space-x-2">
+                    <Input type="text" value={apiKey} readOnly className="pr-10" />
+                    <CopyToClipboard
+                      onCopy={handleCopy}
+                      text={apiKey}
+                    >
+                      <Button onClick={handleCopy} variant="ghost" size="icon" aria-label="Copy to Clipboard Button" className="right-2">
+                        {isCopied ? <CopyCheck className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+                      </Button>
+                    </CopyToClipboard>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Inactive API keys will be revoked after 30 days.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       )}
     </>
   )

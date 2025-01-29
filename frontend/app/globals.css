@@ -20,7 +20,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 0 0% 45%;
 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -47,4 +47,30 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes check-stroke {
+  0% {
+    stroke-dashoffset: 24;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-check-stroke {
+  stroke-dasharray: 24;
+  animation: check-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.ease-spring {
+  transition-timing-function: cubic-bezier(0.65, 0, 0.45, 1);
 }
