@@ -8,9 +8,15 @@ import { GoogleTagManager } from '@next/third-parties/google'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Akash Chat API",
+  title: "AkashChat API",
   description:
-    "Welcome to the Akash Chat API, an open and permissionless Llama3.1 API powered by the Akash Supercloud that anyone can access at completely zero-cost.",
+    "Build with the AkashChat API. Access the leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
+  openGraph: {
+    title: "AkashChat API",
+    description:
+      "Build with the AkashChat API. Access the leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
+    type: "website",
+  },
 }
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
