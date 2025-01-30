@@ -57,11 +57,11 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                         }}
                         onInvalid={(e) => {
                             const target = e.target as HTMLInputElement
-                            target.setCustomValidity("Please agree to the Llama 3.1 Community License.")
-                          }}
+                            target.setCustomValidity("Please agree to the Llama 3.1 & 3.2 Community License.")
+                        }}
                     />
                     <p className="text-sm text-gray-500">
-                        I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>Llama 3.1 Community License</a></u>
+                        I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.1</a></u> & <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.2 Community License</a></u>
                     </p>
                 </div>
                 <button
