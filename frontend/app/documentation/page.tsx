@@ -102,9 +102,9 @@ export default function Documentation() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    const codeToCopy = activeTab === 'python' ? exampleCode : 
-                      activeTab === 'axios' ? exampleAxios : 
-                      exampleCurl;
+    const codeToCopy = activeTab === 'python' ? exampleCode :
+      activeTab === 'axios' ? exampleAxios :
+        exampleCurl;
     navigator.clipboard.writeText(codeToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
@@ -236,12 +236,14 @@ export default function Documentation() {
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             <div className="prose prose-gray max-w-none">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-4">
-                Getting Started
-              </h1>
-              <h2 className="text-2xl font-semibold text-gray-700 mb-8">
-                Using the AkashChat API
-              </h2>
+              <section id="using-the-api">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-4">
+                  Getting Started
+                </h1>
+                <h2 className="text-2xl font-semibold text-gray-700 mb-8">
+                  Using the AkashChat API
+                </h2>
+              </section>
             </div>
 
             <section className="mt-8 sm:mt-12">
@@ -294,33 +296,30 @@ export default function Documentation() {
                     <Button
                       variant="ghost"
                       onClick={() => setActiveTab('python')}
-                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${
-                        activeTab === 'python'
-                          ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-                      }`}
+                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${activeTab === 'python'
+                        ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                        }`}
                     >
                       Python & OpenAI
                     </Button>
                     <Button
                       variant="ghost"
                       onClick={() => setActiveTab('axios')}
-                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${
-                        activeTab === 'axios'
-                          ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-                      }`}
+                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${activeTab === 'axios'
+                        ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                        }`}
                     >
                       JavaScript
                     </Button>
                     <Button
                       variant="ghost"
                       onClick={() => setActiveTab('curl')}
-                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${
-                        activeTab === 'curl'
-                          ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-                      }`}
+                      className={`rounded-none h-8 px-2 xs:px-3 sm:px-4 text-xs sm:text-sm font-medium flex-1 sm:flex-none ${activeTab === 'curl'
+                        ? 'text-white bg-gray-800 hover:bg-gray-800 hover:text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                        }`}
                     >
                       Curl
                     </Button>
@@ -348,13 +347,13 @@ export default function Documentation() {
                 <div className="overflow-x-auto">
                   <div className="min-w-[300px]">
                     {activeTab === 'python' && (
-                      <Code code={exampleCode}  />
+                      <Code code={exampleCode} />
                     )}
                     {activeTab === 'axios' && (
-                      <Code code={exampleAxios}/>
+                      <Code code={exampleAxios} />
                     )}
                     {activeTab === 'curl' && (
-                      <Code code={exampleCurl}/>
+                      <Code code={exampleCurl} />
                     )}
                   </div>
                 </div>
@@ -365,18 +364,18 @@ export default function Documentation() {
               <h2 className="text-xl font-medium mb-4 px-2 xs:px-4 sm:px-0">Available Models</h2>
               <div className="bg-white rounded-lg divide-y divide-gray-100 overflow-hidden">
                 {[
-                  {model: "DeepSeek-R1", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1"},
-                  {model: "DeepSeek-R1-Distill-Llama-70B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B"},
-                  {model: "DeepSeek-R1-Distill-Llama-8B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B"},
-                  {model: "DeepSeek-R1-Distill-Qwen-1.5B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"},
-                  {model: "DeepSeek-R1-Distill-Qwen-14B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"},
-                  {model: "DeepSeek-R1-Distill-Qwen-32B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"},
-                  {model: "DeepSeek-R1-Distill-Qwen-7B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"},
-                  {model: "Meta-Llama-3-1-8B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8"},
-                  {model: "Meta-Llama-3-1-405B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-405B-Instruct-FP8"},
-                  {model: "Meta-Llama-3-2-3B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct"},
-                  {model: "nvidia-Llama-3-1-Nemotron-70B-Instruct-HF", href: "https://huggingface.co/nvidia/Llama-3.1-Nemotron-70B-Instruct"},
-                  {model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct"},
+                  { model: "DeepSeek-R1", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1" },
+                  { model: "DeepSeek-R1-Distill-Llama-70B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B" },
+                  { model: "DeepSeek-R1-Distill-Llama-8B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B" },
+                  { model: "DeepSeek-R1-Distill-Qwen-1.5B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B" },
+                  { model: "DeepSeek-R1-Distill-Qwen-14B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B" },
+                  { model: "DeepSeek-R1-Distill-Qwen-32B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B" },
+                  { model: "DeepSeek-R1-Distill-Qwen-7B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B" },
+                  { model: "Meta-Llama-3-1-8B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8" },
+                  { model: "Meta-Llama-3-1-405B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-405B-Instruct-FP8" },
+                  { model: "Meta-Llama-3-2-3B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct" },
+                  { model: "nvidia-Llama-3-1-Nemotron-70B-Instruct-HF", href: "https://huggingface.co/nvidia/Llama-3.1-Nemotron-70B-Instruct" },
+                  { model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" },
                 ].map((model) => (
                   <div key={model.model} className="p-3 xs:p-4 hover:bg-gray-50 transition-colors">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 min-w-0">
@@ -389,7 +388,7 @@ export default function Documentation() {
                           asChild
                           className="h-7 px-2 text-xs xs:text-sm font-light text-gray-600 hover:text-gray-900 hover:bg-accent hover:text-accent-foreground"
                         >
-                          <a 
+                          <a
                             href={model.href}
                             target="_blank"
                             rel="noopener noreferrer"
