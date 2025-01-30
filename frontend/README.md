@@ -1,6 +1,6 @@
-# Akash Chat API Frontend
+# AkashChat API Frontend
 
-This is the frontend application for the Akash Chat API, built with Next.js and TypeScript. It provides a user interface for generating API keys and accessing documentation for the Akash Chat API service.
+This is the frontend application for the AkashChat API, built with Next.js and TypeScript. It provides a user interface for generating API keys and accessing documentation for the AkashChat API service.
 
 ## Prerequisites
 

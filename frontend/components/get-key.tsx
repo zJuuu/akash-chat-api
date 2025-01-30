@@ -15,7 +15,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
     return (
         <div className="flex justify-center items-center mt-6 md:mt-18">
             <form onSubmit={localHandleSubmit} className="flex flex-col gap-4">
-                <h1 className="text-3xl font-bold">Generate your Akash Chat API key</h1>
+                <h1 className="text-3xl font-bold">Generate your AkashChat API key</h1>
                 <p className="text-sm text-gray-500">
                     Please enter your name, email, and a brief description of how you plan to use the API below.
                 </p>

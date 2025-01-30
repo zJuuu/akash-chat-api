@@ -1,10 +1,10 @@
-# Akash Chat API
+# AkashChat API
 
 A comprehensive solution for LLM integration and API key generation, deployed on the Akash Network.
 
 ## Overview
 
-This repository contains the complete codebase and deployment instructions for the Akash Chat API service. The project consists of two main components:
+This repository contains the complete codebase and deployment instructions for the AkashChat API service. The project consists of two main components:
 
 1. A frontend application for API key generation
 2. A backend service for LLM (Large Language Model) load balancing

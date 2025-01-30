@@ -17,7 +17,7 @@ export function MainNav() {
         <Button variant="ghost" className="p-0">
           <Image
             src="/logo.png"
-            alt="Akash Chat API Logo"
+            alt="AkashChat API Logo"
             height={32}
             className="min-w-8"
           />

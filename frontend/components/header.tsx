@@ -10,7 +10,7 @@ export default function Header() {
       <div className="container flex items-center justify-between">
         <div className="flex items-center pr-4 py-8">
           <Link href="/">
-            <img src="/akash-chat-api.svg" alt="Akash Chat Logo" className="w-48" />
+            <img src="/akash-chat-api.svg" alt="AkashChat Logo" className="w-48" />
           </Link>
         </div>
         <div className="flex items-center justify-center md:mt-0">

@@ -254,7 +254,7 @@ export default function Documentation() {
                 Akash is a permissionless marketplace for cloud resources with competitive pricing compared to traditional cloud providers.
               </p>
               <p className="text-gray-600 mb-6">
-                It's easy to get started, as the Akash Chat API is compatible with the OpenAI API standard. If you're already running on the OpenAI API, it's simple to make the switch. If you're just getting started, see the examples below for interacting with the API.
+                It's easy to get started, as the AkashChat API is compatible with the OpenAI API standard. If you're already running on the OpenAI API, it's simple to make the switch. If you're just getting started, see the examples below for interacting with the API.
               </p>
               <p className="text-gray-600 mb-8">
                 If you need any support, the Akash community is available around the clock to help. For immediate support, please reach out on Discord. For larger issues or feature requests, feel free to start a Discussion on GitHub.

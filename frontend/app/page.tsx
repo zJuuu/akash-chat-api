@@ -90,10 +90,10 @@ export default function Index() {
               <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
                 Build with the
                 <br />
-                Akash Chat API
+                AkashChat API
               </h1>
               <p className="max-w-[600px] text-lg md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Welcome to the Akash Chat API, an open and permissionless LLaMA & DeepSeek API powered by the Akash Supercloud that anyone can access at completely zero-cost.
+                Welcome to the AkashChat API, an open and permissionless LLaMA & DeepSeek API powered by the Akash Supercloud that anyone can access at completely zero-cost.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link
@@ -109,7 +109,7 @@ export default function Index() {
                   className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-white px-4 sm:px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
-                  Akash Chat API Guide
+                  AkashChat API Guide
                 </Link>
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function Index() {
                 <CardDescription>
                   Please keep it safe and secure.
                   <br />
-                  Learn how to get started with the <u><Link target="_blank" href="/documentation">Akash Chat API guide</Link></u>.
+                  Learn how to get started with the <u><Link target="_blank" href="/documentation">AkashChat API guide</Link></u>.
                 </CardDescription>
               </CardHeader>
               <CardContent>
