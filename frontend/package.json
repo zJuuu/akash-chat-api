@@ -1,6 +1,6 @@
 {
   "private": true,
-  "description": "Akash Chat API",
+  "description": "AkashChat API",
   "scripts": {
     "dev": "next",
     "build": "next build",
