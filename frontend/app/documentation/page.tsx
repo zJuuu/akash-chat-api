@@ -272,15 +272,11 @@ export default function Documentation() {
                   {[
                     { model: "DeepSeek-R1", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1" },
                     { model: "DeepSeek-R1-Distill-Llama-70B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B" },
-                    { model: "DeepSeek-R1-Distill-Llama-8B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B" },
-                    { model: "DeepSeek-R1-Distill-Qwen-1.5B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B" },
                     { model: "DeepSeek-R1-Distill-Qwen-14B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B" },
                     { model: "DeepSeek-R1-Distill-Qwen-32B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B" },
-                    { model: "DeepSeek-R1-Distill-Qwen-7B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B" },
                     { model: "Meta-Llama-3-1-8B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8" },
                     { model: "Meta-Llama-3-1-405B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-405B-Instruct-FP8" },
                     { model: "Meta-Llama-3-2-3B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct" },
-                    { model: "nvidia-Llama-3-1-Nemotron-70B-Instruct-HF", href: "https://huggingface.co/nvidia/Llama-3.1-Nemotron-70B-Instruct" },
                     { model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" },
                   ].map((model) => (
                     <div key={model.model} className="p-3 xs:p-4 hover:bg-gray-50 transition-colors">
