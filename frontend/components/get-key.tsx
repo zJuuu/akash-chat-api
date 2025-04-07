@@ -61,7 +61,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                         }}
                     />
                     <p className="text-sm text-gray-500">
-                        I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.1</a></u> & <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.2 Community License</a></u>
+                        I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.1</a></u> & <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>LLaMA 3.2 Community License</a></u> and <u><a href="https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/blob/main/LICENSE" target='_blank'>LLaMA 4 Community License</a></u>
                     </p>
                 </div>
                 <button

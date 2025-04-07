@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { exampleAxios, exampleCode, exampleCurl } from '../constants/codeExamples';
+import { models } from '../constants/models';
 
 SyntaxHighlighter.registerLanguage('python', python);
 SyntaxHighlighter.registerLanguage('bash', bash);
@@ -269,16 +270,7 @@ export default function Documentation() {
               <div className="mb-8">
                 <h3 className="text-lg font-medium mb-3 px-2 xs:px-4 sm:px-0 text-gray-700">Chat + Completions</h3>
                 <div className="bg-white rounded-lg divide-y divide-gray-100 overflow-hidden">
-                  {[
-                    { model: "DeepSeek-R1", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1" },
-                    { model: "DeepSeek-R1-Distill-Llama-70B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B" },
-                    { model: "DeepSeek-R1-Distill-Qwen-14B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B" },
-                    { model: "DeepSeek-R1-Distill-Qwen-32B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B" },
-                    { model: "Meta-Llama-3-1-8B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-8B-Instruct-FP8" },
-                    { model: "Meta-Llama-3-1-405B-Instruct-FP8", href: "https://huggingface.co/neuralmagic/Meta-Llama-3.1-405B-Instruct-FP8" },
-                    { model: "Meta-Llama-3-2-3B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct" },
-                    { model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" },
-                  ].map((model) => (
+                  {models.map((model) => (
                     <div key={model.model} className="p-3 xs:p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center justify-between gap-4 min-w-0">
                         <div 
