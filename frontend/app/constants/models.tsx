@@ -7,4 +7,5 @@ export const models = [
     { model: "Meta-Llama-3-2-3B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct" },
     { model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" },
     { model: "Meta-Llama-4-Maverick-17B-128E-Instruct-FP8", href: "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8" },
+    { model: "Qwen3-235B-A22B-FP8", href: "https://huggingface.co/Qwen/Qwen3-235B-A22B-FP8" },
 ]
