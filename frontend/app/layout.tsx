@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         </div>
         <Footer />
       </body>
-      <GoogleTagManager gtmId={"G-LFRGN2J2RV"}/>
+      <GoogleAnalytics gaId="G-LFRGN2J2RV" />
     </html>
   )
 }
