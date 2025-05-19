@@ -17,7 +17,6 @@ This repository contains the complete codebase and deployment instructions for t
 - **Live Version**: [chatapi.akash.network](https://chatapi.akash.network)
 - **Location**: `/frontend` directory
 - **Requirements**:
-  - MongoDB instance running on port 27017 for user data storage
   - A running instance of the LiteLLM backend
 
 ### Backend

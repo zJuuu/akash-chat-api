@@ -30,7 +30,6 @@ pnpm install
 3. Create a `.env.local` file in the root directory with the following variables:
 
 ```plaintext
-MONGODB_URI=your_mongodb_connection_string
 LITELLM_API_ENDPOINT=your_litellm_api_endpoint
 LITELLM_ADMIN_KEY=your_litellm_admin_key
 LITELLM_USER_ROLE=your_user_role

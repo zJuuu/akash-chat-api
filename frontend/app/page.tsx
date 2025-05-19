@@ -1,13 +1,15 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useEffect } from "react"
 import GetKey from "../components/get-key"
 import z from 'zod'
 import { Input } from "@/components/ui/input"
-import { CheckCircle2, CopyCheck, CopyIcon, ArrowLeft } from "lucide-react"
+import { CheckCircle2, CopyCheck, CopyIcon, ArrowLeft, LogIn } from "lucide-react"
 import Link from "next/link"
 import CopyToClipboard from "react-copy-to-clipboard"
+import { useRouter } from "next/navigation"
+import { ory } from "@/lib/ory"
 
 const schema = z.object({
   name: z.string().optional(),
@@ -22,10 +24,36 @@ export default function Index() {
   const [step, setStep] = useState(0);
   const [apiKey, setApiKey] = useState('');
   const [isCopied, setCopied] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    ory
+      .toSession()
+      .then(() => {
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleBack = () => {
     if (step > 0) {
       setStep(step - 1);
+    }
+  };
+
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      setStep(1);
+    } else {
+      // Redirect to login if not authenticated
+      router.push("/login?returnTo=/");
     }
   };
 
@@ -34,8 +62,8 @@ export default function Index() {
 
     if (step === 1) {
       const formData = new FormData(e.target as HTMLFormElement);
-      const name = formData.get('name') as string;
-      const email = formData.get('email') as string;
+      const newsletterCheckbox = (e.target as HTMLFormElement).querySelector('input[name="newsletter_consent"]') as HTMLInputElement;
+      const newsletter = newsletterCheckbox.checked;
       const description = formData.get('description') as string;
       const tosCheckbox = (e.target as HTMLFormElement).querySelector('input[name="tos"]') as HTMLInputElement;
       const tos = tosCheckbox.checked;
@@ -44,22 +72,12 @@ export default function Index() {
         return;
       }
 
-      try {
-        schema.parse({ name, description })
-        emailSchema.safeParse(email)
-      } catch (err: any) {
-        alert(err.errors)
-        console.log(err.errors);
-
-        return false
-      }
-
       const res = await fetch('/api/users/claim-api-key', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, name, description, acceptToS: tos }),
+        body: JSON.stringify({ description, acceptToS: tos, newsletter }),
       })
 
       if (res.ok) {
@@ -67,6 +85,11 @@ export default function Index() {
         setApiKey(data.apikey);
         setStep(2);
       } else {
+        if (res.status === 401) {
+          // If authentication is required, redirect to login
+          router.push("/login?returnTo=/");
+          return false;
+        }
         alert('Failed to register')
         console.error(await res.text())
         return false
@@ -96,14 +119,22 @@ export default function Index() {
                 Welcome to the AkashChat API, an open and permissionless LLaMA & DeepSeek API powered by the Akash Supercloud that anyone can access at completely zero-cost.
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link
-                  href="#"
+                <Button
                   className="inline-flex h-10 items-center justify-center rounded-md bg-akashred px-4 sm:px-8 text-sm font-medium text-white shadow transition-colors hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                  onClick={() => setStep(1)}
+                  onClick={handleGetStarted}
+                  disabled={isLoading}
                 >
-                  Get Started
-                </Link>
+                  {isLoading ? (
+                    "Loading..."
+                  ) : isAuthenticated ? (
+                    "Get Started"
+                  ) : (
+                    <>
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Sign in to continue
+                    </>
+                  )}
+                </Button>
                 <Link
                   href="/documentation"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-white px-4 sm:px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
