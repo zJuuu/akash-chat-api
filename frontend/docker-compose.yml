@@ -1,6 +1,14 @@
-version: '3.8'
-
 services:
+  redis:
+    image: redis:7-alpine
+    container_name: chat-api-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
   frontend:
     build:
       context: .
@@ -10,4 +18,9 @@ services:
       - "3000:3000"
     env_file:
       - .env.local
+    depends_on:
+      - redis
     restart: unless-stopped
+
+volumes:
+  redis_data:
