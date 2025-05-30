@@ -1,5 +1,5 @@
 export const models = [
-    { model: "DeepSeek-R1", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1" },
+    { model: "DeepSeek-R1-0528", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" },
     { model: "DeepSeek-R1-Distill-Llama-70B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B" },
     { model: "DeepSeek-R1-Distill-Qwen-14B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B" },
     { model: "DeepSeek-R1-Distill-Qwen-32B", href: "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B" },
