@@ -6,9 +6,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
 
-// Debug log to check if sitekey is available
-console.log('reCAPTCHA sitekey:', sitekey ? 'SET' : 'MISSING', sitekey.length > 0 ? `(${sitekey.length} chars)` : '');
-
 export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEvent) => Promise<boolean | undefined> }) {
     const [loading, setLoading] = useState(false);
     const { user, isLoading, error } = useUser();
