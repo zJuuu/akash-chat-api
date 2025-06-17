@@ -201,7 +201,7 @@ export default function Index() {
         </section>
       )}
       {step === 1 && (
-        <div className="container flex flex-col items-center justify-start py-4 md:py-8">
+        <div className="container flex flex-col items-center justify-start py-2 md:py-4">
           <div className="w-full max-w-4xl">
             <Button
               variant="ghost"
@@ -216,76 +216,70 @@ export default function Index() {
         </div>
       )}
       {step === 2 && (
-        <div className="container flex flex-col items-center justify-center min-h-screen py-6">
-          <div className="w-full max-w-lg 2xl:max-w-3xl">
-            <Button
-              variant="ghost"
-              onClick={handleBack}
-              className="mb-4 -ml-2 flex items-center gap-2 text-gray-600 hover:text-gray-900"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle2 className="w-10 h-10 text-[#4BB543]" />
-                    <span>Your API Key was generated successfully.</span>
-                  </div>
-                </CardTitle>
-                <CardDescription>
-                  Please keep it safe and secure.
-                  <br />
-                  Learn how to get started with the <u><Link target="_blank" href="/documentation">AkashChat API guide</Link></u>.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="font-medium mb-2">Your API Key is:</p>
+        <div className="container flex flex-col items-center justify-start py-2 md:py-4">
+          <div className="w-full max-w-4xl min-h-[600px]">
+            <div className="w-full max-w-lg 2xl:max-w-3xl mx-auto">
+              <Card className="mt-4">
+                <CardHeader>
+                  <CardTitle>
                     <div className="flex items-center space-x-2">
-                      <Input type="text" value={apiKey} readOnly className="pr-10" />
-                      <CopyToClipboard
-                        onCopy={handleCopy}
-                        text={apiKey}
-                      >
-                        <Button onClick={handleCopy} variant="ghost" size="icon" aria-label="Copy to Clipboard Button" className="right-2">
-                          {isCopied ? <CopyCheck className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
-                        </Button>
-                      </CopyToClipboard>
+                      <CheckCircle2 className="w-10 h-10 text-[#4BB543]" />
+                      <span>Your API Key was generated successfully.</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">Inactive API keys will be revoked after 30 days.</p>
-                  </div>
-
-                  {sessionId && (
-                    <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
-                      <div className="flex items-center gap-2 mb-2">
-                        <User className="w-4 h-4 text-blue-600" />
-                        <p className="text-sm font-medium text-blue-800">Account Created Locally</p>
+                  </CardTitle>
+                  <CardDescription>
+                    Please keep it safe and secure.
+                    <br />
+                    Learn how to get started with the <u><Link target="_blank" href="/documentation">AkashChat API guide</Link></u>.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="font-medium mb-2">Your API Key is:</p>
+                      <div className="flex items-center space-x-2">
+                        <Input type="text" value={apiKey} readOnly className="pr-10" />
+                        <CopyToClipboard
+                          onCopy={handleCopy}
+                          text={apiKey}
+                        >
+                          <Button onClick={handleCopy} variant="ghost" size="icon" aria-label="Copy to Clipboard Button" className="right-2">
+                            {isCopied ? <CopyCheck className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+                          </Button>
+                        </CopyToClipboard>
                       </div>
-                      <p className="text-sm text-blue-700 mb-3">
-                        Your account has been created locally in your browser! You can now manage your API keys.
-                      </p>
+                      <p className="text-sm text-muted-foreground mt-2">Inactive API keys will be revoked after 30 days.</p>
                     </div>
-                  )}
 
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Link href="/documentation" className="flex-1">
-                      <Button variant="outline" className="w-full">
-                        View Documentation
-                      </Button>
-                    </Link>
-                    <Link href="/account" className="flex-1">
-                      <Button className="w-full bg-gray-900 hover:bg-gray-800">
-                        <User className="w-4 h-4 mr-2" />
-                        Manage Account
-                      </Button>
-                    </Link>
+                    {sessionId && (
+                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
+                        <div className="flex items-center gap-2 mb-2">
+                          <User className="w-4 h-4 text-blue-600" />
+                          <p className="text-sm font-medium text-blue-800">Account Created Locally</p>
+                        </div>
+                        <p className="text-sm text-blue-700 mb-3">
+                          Your account has been created locally in your browser! You can now manage your API keys.
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Link href="/documentation" className="flex-1">
+                        <Button variant="outline" className="w-full">
+                          View Documentation
+                        </Button>
+                      </Link>
+                      <Link href="/account" className="flex-1">
+                        <Button className="w-full bg-gray-900 hover:bg-gray-800">
+                          <User className="w-4 h-4 mr-2" />
+                          Manage Account
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       )}

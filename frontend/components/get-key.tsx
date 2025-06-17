@@ -286,7 +286,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
     }
 
     return (
-        <div className="flex justify-center items-center mt-6 md:mt-18">
+        <div className="flex justify-center items-center mt-2 md:mt-4">
             <form onSubmit={localHandleSubmit} className="flex flex-col gap-4 w-full max-w-lg">
                 <h1 className="text-3xl font-bold">Generate Your AkashChat API Key</h1>
                 <p className="text-sm text-gray-500">
@@ -299,7 +299,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                         <TabsTrigger value="auth0">Extended</TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="non-auth0">
+                    <TabsContent value="non-auth0" className="min-h-[600px]">
                         <div className="space-y-6">
                             <div className="p-4 bg-green-50 rounded-lg border border-green-200">
                                 <h3 className="text-lg font-semibold mb-2 text-green-800">Permissionless Access</h3>
@@ -395,7 +395,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                 </p>
                     </TabsContent>
 
-                    <TabsContent value="auth0">
+                    <TabsContent value="auth0" className="min-h-[600px]">
                         <div className="space-y-6">
                             <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                                 <h3 className="text-lg font-semibold mb-2 text-blue-800">Extended Access Benefits</h3>
