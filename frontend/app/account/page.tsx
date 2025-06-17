@@ -13,7 +13,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useAppUser } from '@/components/providers/UserProvider';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { sidekey } from '@/components/get-key';
+import { sitekey } from '@/components/get-key';
 
 interface ApiKey {
   _id: string;
@@ -706,7 +706,7 @@ export default function AccountPage() {
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey={sidekey}
+                  sitekey={sitekey}
                   onChange={(value: string | null) => setRecaptchaValue(value)}
                 />
               </div>
@@ -773,7 +773,7 @@ export default function AccountPage() {
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={newKeyRecaptchaRef}
-                  sitekey={sidekey}
+                  sitekey={sitekey}
                   onChange={(value: string | null) => setNewKeyRecaptchaValue(value)}
                 />
               </div>

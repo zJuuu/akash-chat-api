@@ -40,7 +40,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           </Auth0Provider>
         </ErrorBoundary>
       </body>
-      <GoogleAnalytics gaId="G-LFRGN2J2RV" />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
     </html>
   )
 }

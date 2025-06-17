@@ -4,7 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-export const sidekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+export const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
 
 export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEvent) => Promise<boolean | undefined> }) {
     const [loading, setLoading] = useState(false);
@@ -340,7 +340,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
 
                                 <div className="flex justify-center pt-2">
                                     <ReCAPTCHA
-                                        sitekey={sidekey}
+                                        sitekey={sitekey}
                                         onChange={(value: string | null) => setRecaptchaValue(value)}
                                     />
                                 </div>
