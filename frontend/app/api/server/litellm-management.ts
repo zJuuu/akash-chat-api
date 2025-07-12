@@ -99,7 +99,7 @@ export const createUserSession = async (email: string, userId: string) => {
   try {
     const sessionId = randomBytes(32).toString('hex');
     const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 7); // 7 days expiry
+    expiresAt.setDate(expiresAt.getDate() + 14); // 14 days expiry
     
     const session: UserSession = {
       sessionId,
@@ -111,7 +111,7 @@ export const createUserSession = async (email: string, userId: string) => {
     
     if (useRedis) {
       // Use Redis for session storage
-      const success = await redisSessionHelpers.setSession(sessionId, session, 7 * 24 * 60 * 60);
+      const success = await redisSessionHelpers.setSession(sessionId, session, 14 * 24 * 60 * 60);
       if (!success) {
         log.error('Failed to store session in Redis, falling back to memory', { sessionId: sessionId.substring(0, 8) + '...' });
         sessionStore.set(sessionId, session);
@@ -134,6 +134,62 @@ export const createUserSession = async (email: string, userId: string) => {
   } catch (error) {
     log.error('Error creating session', { email, userId, error });
     return null;
+  }
+};
+
+// Renew session expiration
+export const renewSession = async (sessionId: string): Promise<boolean> => {
+  const useRedis = await ensureRedisConnection();
+  log.debug('Renewing session', { sessionId: sessionId.substring(0, 8) + '...', usingRedis: useRedis });
+  
+  try {
+    let session: UserSession | null = null;
+    
+    if (useRedis) {
+      session = await redisSessionHelpers.getSession(sessionId);
+    } else {
+      session = sessionStore.get(sessionId) || null;
+    }
+    
+    if (!session) {
+      log.warn('Cannot renew session - session not found', { sessionId: sessionId.substring(0, 8) + '...' });
+      return false;
+    }
+    
+    // Update expiration to 14 days from now
+    const newExpiresAt = new Date();
+    newExpiresAt.setDate(newExpiresAt.getDate() + 14);
+    
+    const updatedSession: UserSession = {
+      ...session,
+      expiresAt: newExpiresAt
+    };
+    
+    if (useRedis) {
+      const success = await redisSessionHelpers.setSession(sessionId, updatedSession, 14 * 24 * 60 * 60);
+      if (success) {
+        log.info('Session renewed successfully in Redis', { 
+          sessionId: sessionId.substring(0, 8) + '...',
+          newExpiresAt: newExpiresAt.toISOString()
+        });
+        return true;
+      }
+    } else {
+      sessionStore.set(sessionId, updatedSession);
+      log.info('Session renewed successfully in memory', { 
+        sessionId: sessionId.substring(0, 8) + '...',
+        newExpiresAt: newExpiresAt.toISOString()
+      });
+      return true;
+    }
+    
+    return false;
+  } catch (error) {
+    log.error('Error renewing session', { 
+      sessionId: sessionId.substring(0, 8) + '...', 
+      error 
+    });
+    return false;
   }
 };
 
@@ -175,11 +231,14 @@ export const getUserBySession = async (sessionId: string) => {
       return null;
     }
     
-    log.debug('Valid session found, fetching user from LiteLLM', { 
+    log.debug('Valid session found, renewing session and fetching user from LiteLLM', { 
       userId: session.userId,
       email: session.email,
       storageType: useRedis ? 'Redis' : 'Memory'
     });
+    
+    // Renew session on successful validation
+    await renewSession(sessionId);
     
     // Get user from LiteLLM
     const response = await fetch(`${process.env.LITELLM_API_ENDPOINT}/user/info?user_id=${session.userId}`, {

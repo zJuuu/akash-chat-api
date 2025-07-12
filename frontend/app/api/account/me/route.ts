@@ -295,7 +295,7 @@ export async function GET(req: NextRequest) {
       keyCount: apiKeys.length
     });
 
-    return new NextResponse(JSON.stringify(responseData), {
+    const nextResponse = new NextResponse(JSON.stringify(responseData), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
@@ -304,6 +304,26 @@ export async function GET(req: NextRequest) {
         "X-RateLimit-Reset": Math.ceil(rateLimit.resetTime / 1000).toString()
       },
     });
+
+    // Renew session cookie for non-Auth0 users
+    if (authType === 'non-auth0') {
+      const sessionCookie = req.cookies.get('akash-session')?.value;
+      if (sessionCookie) {
+        log.debug('Renewing session cookie', { 
+          requestId,
+          sessionId: sessionCookie.substring(0, 8) + '...'
+        });
+        
+        nextResponse.cookies.set('akash-session', sessionCookie, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+          maxAge: 14 * 24 * 60 * 60 // 14 days
+        });
+      }
+    }
+
+    return nextResponse;
   } catch (error) {
     log.error('Unexpected error in account info request', { requestId, error });
     return new NextResponse(JSON.stringify({ message: 'Internal server error' }), {

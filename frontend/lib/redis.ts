@@ -102,7 +102,7 @@ export const closeRedisConnection = async (): Promise<void> => {
 // Redis session helpers
 export const redisSessionHelpers = {
   // Set session with expiration
-  setSession: async (sessionId: string, sessionData: any, expirationSeconds: number = 7 * 24 * 60 * 60): Promise<boolean> => {
+  setSession: async (sessionId: string, sessionData: any, expirationSeconds: number = 14 * 24 * 60 * 60): Promise<boolean> => {
     try {
       const client = getRedisClient();
       const key = `session:${sessionId}`;
