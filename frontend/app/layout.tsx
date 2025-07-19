@@ -7,6 +7,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { Auth0Provider } from "@/components/providers/Auth0Provider"
 import { UserProvider } from "@/components/providers/UserProvider"
 import { ErrorBoundary } from "@/components/providers/ErrorBoundary"
+import { ThemeProvider } from "@/components/providers/ThemeProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -24,21 +25,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ErrorBoundary>
-          <Auth0Provider>
-            <UserProvider>
-              <div className="flex flex-col justify-between w-full h-full min-h-screen">
-                <Header />
-                <main className="flex flex-col items-center justify-center flex-1 p-4">
-                  {children}
-                </main>
-              </div>
-              <Footer />
-            </UserProvider>
-          </Auth0Provider>
-        </ErrorBoundary>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ErrorBoundary>
+            <Auth0Provider>
+              <UserProvider>
+                <div className="flex flex-col justify-between w-full h-full min-h-screen">
+                  <Header />
+                  <main className="flex flex-col items-center justify-center flex-1 p-4">
+                    {children}
+                  </main>
+                </div>
+                <Footer />
+              </UserProvider>
+            </Auth0Provider>
+          </ErrorBoundary>
+        </ThemeProvider>
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
     </html>
