@@ -347,7 +347,7 @@ export default function AccountPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <p className="text-red-600">Error: {authError || error}</p>
+          <p className="text-destructive">Error: {authError || error}</p>
           <div className="flex gap-2 justify-center">
             <Button onClick={() => window.location.reload()}>Retry</Button>
             <Button variant="outline" onClick={() => router.push('/')}>Go Home</Button>
@@ -361,7 +361,7 @@ export default function AccountPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
-          <p className="text-gray-600">Please sign in to access your account</p>
+          <p className="text-muted-foreground">Please sign in to access your account</p>
           <Button onClick={() => router.push('/')}>Go Home</Button>
         </div>
       </div>
@@ -373,8 +373,8 @@ export default function AccountPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Account Dashboard</h1>
-          <p className="text-gray-600">Manage your AkashChat API account and API keys</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Account Dashboard</h1>
+          <p className="text-muted-foreground">Manage your AkashChat API account and API keys</p>
         </div>
 
         {/* Account Information */}
@@ -391,16 +391,16 @@ export default function AccountPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-center gap-3">
-                <Calendar className="w-4 h-4 text-gray-500" />
+                <Calendar className="w-4 h-4 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Member Since</p>
-                  <p className="text-gray-900">{formatDate(user.createdAt)}</p>
+                  <p className="text-sm font-medium text-muted-foreground">Member Since</p>
+                  <p className="text-foreground">{formatDate(user.createdAt)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <Key className="w-4 h-4 text-gray-500" />
+                <Key className="w-4 h-4 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Account Type</p>
+                  <p className="text-sm font-medium text-muted-foreground">Account Type</p>
                   <Badge variant={user.authType === 'auth0' ? 'default' : 'secondary'}>
                     {user.authType === 'auth0' ? 'Extended Access' : 'Permissionless'}
                   </Badge>
@@ -409,8 +409,8 @@ export default function AccountPage() {
             </div>
             {user.description && user.description !== 'No description provided' && (
               <div className="mt-6 pt-6 border-t">
-                <p className="text-sm font-medium text-gray-500 mb-2">Description</p>
-                <p className="text-gray-900">{user.description}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-2">Description</p>
+                <p className="text-foreground">{user.description}</p>
               </div>
             )}
           </CardContent>
@@ -476,8 +476,8 @@ export default function AccountPage() {
           <CardContent>
             {user.apiKeys.length === 0 ? (
               <div className="text-center py-8">
-                <Key className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">No API keys found</p>
+                <Key className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground mb-4">No API keys found</p>
                 <Button 
                   onClick={handleGenerateNewKey}
                   disabled={user.authType === 'auth0' && auth0User && auth0User.email_verified === false}
@@ -500,16 +500,16 @@ export default function AccountPage() {
                   </div>
                 )}
                 {user.apiKeys.map((apiKey) => (
-                  <div key={apiKey._id} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div key={apiKey._id} className="p-4 border rounded-lg hover:bg-muted transition-colors">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">                         
                         <div className="flex items-center gap-2 mb-2">
-                          <code className="px-2 py-1 bg-gray-100 rounded text-sm font-mono">
+                          <code className="px-2 py-1 bg-muted rounded text-sm font-mono">
                             {apiKey.keyPreview}
                           </code>
                         </div>
 
-                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             Created {formatDate(apiKey.createdAt)}
@@ -557,13 +557,13 @@ export default function AccountPage() {
 
         {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Need help? Check out our{' '}
-            <Link href="/documentation" className="text-blue-600 hover:underline">
+            <Link href="/documentation" className="text-blue-600 dark:text-blue-400 hover:underline">
               documentation
             </Link>{' '}
             or reach out on{' '}
-            <a href="https://discord.com/invite/akash" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+            <a href="https://discord.com/invite/akash" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
               Discord
             </a>
           </p>
@@ -573,9 +573,9 @@ export default function AccountPage() {
       {/* New API Key Modal */}
       {showNewKeyModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-background rounded-lg p-6 w-full max-w-md border">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Generate New API Key</h2>
+              <h2 className="text-lg font-semibold text-foreground">Generate New API Key</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -631,7 +631,7 @@ export default function AccountPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Your New API Key
                   </label>
                   <div className="flex items-center gap-2">
@@ -673,9 +673,9 @@ export default function AccountPage() {
       {/* reCAPTCHA Modal for Key Regeneration */}
       {showRecaptcha && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-background rounded-lg p-6 w-full max-w-md border">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Security Verification</h2>
+              <h2 className="text-lg font-semibold text-foreground">Security Verification</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -741,9 +741,9 @@ export default function AccountPage() {
       {/* reCAPTCHA Modal for New Key Generation */}
       {showNewKeyRecaptcha && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-background rounded-lg p-6 w-full max-w-md border">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Security Verification</h2>
+              <h2 className="text-lg font-semibold text-foreground">Security Verification</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -807,9 +807,9 @@ export default function AccountPage() {
       {/* Confirmation Modal for API Key Recreation */}
       {showConfirmRecreate && keyToRecreate && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-background rounded-lg p-6 w-full max-w-md border">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Confirm API Key Recreation</h2>
+              <h2 className="text-lg font-semibold text-foreground">Confirm API Key Recreation</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -834,8 +834,8 @@ export default function AccountPage() {
               </div>
 
               <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-sm text-gray-600 mb-1">API Key to recreate:</p>
-                <code className="text-sm font-mono text-gray-800">
+                <p className="text-sm text-muted-foreground mb-1">API Key to recreate:</p>
+                <code className="text-sm font-mono text-foreground">
                   {user?.apiKeys.find(key => key.keyId === keyToRecreate.keyId)?.keyPreview}
                 </code>
               </div>
@@ -868,9 +868,9 @@ export default function AccountPage() {
       {/* Consent Modal */}
       {showConsentModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+          <div className="bg-background rounded-lg p-6 w-full max-w-md border">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Update Consent Required</h2>
+              <h2 className="text-lg font-semibold text-foreground">Update Consent Required</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -901,11 +901,11 @@ export default function AccountPage() {
                   <input
                     type="checkbox"
                     id="consent-tos"
-                    className="mt-1 h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
+                    className="mt-1 h-4 w-4 text-foreground focus:ring-ring border-border rounded"
                     checked={tosAccepted}
                     onChange={(e) => setTosAccepted(e.target.checked)}
                   />
-                  <label htmlFor="consent-tos" className="text-sm text-gray-700">
+                  <label htmlFor="consent-tos" className="text-sm text-foreground">
                     I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank' className="text-blue-600 hover:text-blue-800">Llama 3.1</a></u>, <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank' className="text-blue-600 hover:text-blue-800">Llama 3.2</a></u>, and <u><a href="https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/blob/main/LICENSE" target='_blank' className="text-blue-600 hover:text-blue-800">Llama 4</a></u> Community Licenses. *
                   </label>
                 </div>
@@ -914,11 +914,11 @@ export default function AccountPage() {
                   <input
                     type="checkbox"
                     id="consent-communications"
-                    className="mt-1 h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
+                    className="mt-1 h-4 w-4 text-foreground focus:ring-ring border-border rounded"
                     checked={communicationsAccepted}
                     onChange={(e) => setCommunicationsAccepted(e.target.checked)}
                   />
-                  <label htmlFor="consent-communications" className="text-sm text-gray-700">
+                  <label htmlFor="consent-communications" className="text-sm text-foreground">
                     I agree to receive communications from Akash regarding service updates, security notices, API changes, marketing materials, and other commercial information. *
                   </label>
                 </div>

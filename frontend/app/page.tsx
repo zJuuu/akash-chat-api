@@ -157,7 +157,7 @@ export default function Index() {
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 {isLoading ? (
-                  <div className="inline-flex h-10 items-center justify-center rounded-md bg-gray-200 px-4 sm:px-8 text-sm font-medium text-gray-500 shadow">
+                  <div className="inline-flex h-10 items-center justify-center rounded-md bg-muted px-4 sm:px-8 text-sm font-medium text-muted-foreground shadow">
                     Loading...
                   </div>
                 ) : isAuthenticated ? (
@@ -206,7 +206,7 @@ export default function Index() {
             <Button
               variant="ghost"
               onClick={handleBack}
-              className="mb-4 -ml-2 flex items-center gap-2 text-gray-600 hover:text-gray-900"
+              className="mb-4 -ml-2 flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
@@ -270,7 +270,7 @@ export default function Index() {
                         </Button>
                       </Link>
                       <Link href="/account" className="flex-1">
-                        <Button className="w-full bg-gray-900 hover:bg-gray-800">
+                        <Button className="w-full bg-primary hover:bg-primary/90">
                           <User className="w-4 h-4 mr-2" />
                           Manage Account
                         </Button>
