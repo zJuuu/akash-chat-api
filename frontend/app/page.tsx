@@ -252,12 +252,12 @@ export default function Index() {
                     </div>
 
                     {sessionId && (
-                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
+                      <div className="p-4 bg-muted border border-border rounded-md">
                         <div className="flex items-center gap-2 mb-2">
-                          <User className="w-4 h-4 text-blue-600" />
-                          <p className="text-sm font-medium text-blue-800">Account Created Locally</p>
+                          <User className="w-4 h-4 text-akashred" />
+                          <p className="text-sm font-medium text-foreground">Account Created Locally</p>
                         </div>
-                        <p className="text-sm text-blue-700 mb-3">
+                        <p className="text-sm text-muted-foreground mb-3">
                           Your account has been created locally in your browser! You can now manage your API keys.
                         </p>
                       </div>

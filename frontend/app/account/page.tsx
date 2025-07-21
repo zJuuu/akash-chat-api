@@ -489,12 +489,12 @@ export default function AccountPage() {
             ) : (
               <div className="space-y-4">
                 {user.apiKeys.filter(key => key.isActive).length > 0 && (
-                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4">
+                  <div className="p-4 bg-muted border border-border rounded-lg mb-4">
                     <div className="flex items-center gap-2 mb-2">
-                      <Key className="w-4 h-4 text-blue-600" />
-                      <p className="text-sm font-medium text-blue-800">One API Key Policy</p>
+                      <Key className="w-4 h-4 text-akashred" />
+                      <p className="text-sm font-medium text-foreground">One API Key Policy</p>
                     </div>
-                    <p className="text-sm text-blue-700">
+                    <p className="text-sm text-muted-foreground">
                       You currently have an active API key. To generate a new key, please recreate your existing key.
                     </p>
                   </div>
@@ -540,7 +540,7 @@ export default function AccountPage() {
                             onClick={() => handleRecreateKey(apiKey.keyId, apiKey.name)}
                             disabled={user.authType === 'auth0' && auth0User && auth0User.email_verified === false}
                             title={user.authType === 'auth0' && auth0User && auth0User.email_verified === false ? "Please verify your email address first" : "Recreate API Key"}
-                            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="text-akashred hover:text-akashred/80 hover:bg-accent border-border disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <RotateCcw className="w-3 h-3 mr-1" />
                             Recreate
@@ -559,11 +559,11 @@ export default function AccountPage() {
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground mb-4">
             Need help? Check out our{' '}
-            <Link href="/documentation" className="text-blue-600 dark:text-blue-400 hover:underline">
+            <Link href="/documentation" className="text-akashred hover:underline">
               documentation
             </Link>{' '}
             or reach out on{' '}
-            <a href="https://discord.com/invite/akash" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+            <a href="https://discord.com/invite/akash" target="_blank" rel="noopener noreferrer" className="text-akashred hover:underline">
               Discord
             </a>
           </p>
@@ -590,12 +590,12 @@ export default function AccountPage() {
 
             {!newlyGeneratedKey ? (
               <div className="space-y-4">
-                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="p-4 bg-muted border border-border rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <Key className="w-4 h-4 text-blue-600" />
-                    <p className="text-sm font-medium text-blue-800">Ready to Generate API Key</p>
+                    <Key className="w-4 h-4 text-akashred" />
+                    <p className="text-sm font-medium text-foreground">Ready to Generate API Key</p>
                   </div>
-                  <p className="text-sm text-blue-700">
+                  <p className="text-sm text-muted-foreground">
                     Click the button below to proceed with generating your new API key.
                   </p>
                 </div>
@@ -693,12 +693,12 @@ export default function AccountPage() {
             </div>
 
             <div className="space-y-4">
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="p-4 bg-muted border border-border rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <RotateCcw className="w-4 h-4 text-blue-600" />
-                  <p className="text-sm font-medium text-blue-800">Recreate API Key</p>
+                  <RotateCcw className="w-4 h-4 text-akashred" />
+                  <p className="text-sm font-medium text-foreground">Recreate API Key</p>
                 </div>
-                <p className="text-sm text-blue-700">
+                <p className="text-sm text-muted-foreground">
                   Please complete the security verification to recreate your API key.
                 </p>
               </div>

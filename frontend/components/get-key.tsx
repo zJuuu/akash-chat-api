@@ -186,8 +186,8 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                             Please wait while we verify your email address. This may take a few moments.
                         </p>
                         {isVerifyingEmail && !emailVerified && (
-                            <div className="p-4 bg-blue-50 border border-blue-200 rounded-md mt-4">
-                                <p className="text-sm text-blue-800">
+                            <div className="p-4 bg-muted border border-border rounded-md mt-4">
+                                <p className="text-sm text-foreground">
                                     If you don't see your email verified, you may need to:
                                     <ul className="list-disc list-inside mt-2">
                                         <li>Ensure your GitHub email is verified</li>
@@ -397,12 +397,12 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
 
                     <TabsContent value="auth0" className="min-h-[600px]">
                         <div className="space-y-6">
-                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                                <h3 className="text-lg font-semibold mb-2 text-blue-800">Extended Access Benefits</h3>
-                                <p className="text-sm text-blue-700 mb-2">
+                            <div className="p-4 bg-muted rounded-lg border border-border">
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Extended Access Benefits</h3>
+                                <p className="text-sm text-muted-foreground mb-2">
                                     Sign up for enhanced features and better account management.
                                 </p>
-                                <ul className="space-y-1 text-sm text-blue-600">
+                                <ul className="space-y-1 text-sm text-muted-foreground">
                                     <li>• Account dashboard with API key management</li>
                                     <li>• Future premium features</li>
                                 </ul>
