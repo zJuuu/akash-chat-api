@@ -4,8 +4,7 @@ import textwrap
 client = openai.OpenAI(
     api_key="sk-xxxxxxxx",
     base_url=(
-        "https://chatapi.akash.network"
-        "/api/v1"
+        "https://chatapi.akash.network/api/v1"
     )
 )
 

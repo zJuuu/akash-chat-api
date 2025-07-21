@@ -157,7 +157,7 @@ export default function Index() {
               </p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 {isLoading ? (
-                  <div className="inline-flex h-10 items-center justify-center rounded-md bg-gray-200 px-4 sm:px-8 text-sm font-medium text-gray-500 shadow">
+                  <div className="inline-flex h-10 items-center justify-center rounded-md bg-muted px-4 sm:px-8 text-sm font-medium text-muted-foreground shadow">
                     Loading...
                   </div>
                 ) : isAuthenticated ? (
@@ -181,7 +181,7 @@ export default function Index() {
                 )}
                 <Link
                   href="/documentation"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-white px-4 sm:px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background text-foreground px-4 sm:px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   AkashChat API Guide
@@ -206,7 +206,7 @@ export default function Index() {
             <Button
               variant="ghost"
               onClick={handleBack}
-              className="mb-4 -ml-2 flex items-center gap-2 text-gray-600 hover:text-gray-900"
+              className="mb-4 -ml-2 flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
@@ -252,12 +252,12 @@ export default function Index() {
                     </div>
 
                     {sessionId && (
-                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
+                      <div className="p-4 bg-muted border border-border rounded-md">
                         <div className="flex items-center gap-2 mb-2">
-                          <User className="w-4 h-4 text-blue-600" />
-                          <p className="text-sm font-medium text-blue-800">Account Created Locally</p>
+                          <User className="w-4 h-4 text-akashred" />
+                          <p className="text-sm font-medium text-foreground">Account Created Locally</p>
                         </div>
-                        <p className="text-sm text-blue-700 mb-3">
+                        <p className="text-sm text-muted-foreground mb-3">
                           Your account has been created locally in your browser! You can now manage your API keys.
                         </p>
                       </div>
@@ -270,7 +270,7 @@ export default function Index() {
                         </Button>
                       </Link>
                       <Link href="/account" className="flex-1">
-                        <Button className="w-full bg-gray-900 hover:bg-gray-800">
+                        <Button className="w-full bg-primary hover:bg-primary/90">
                           <User className="w-4 h-4 mr-2" />
                           Manage Account
                         </Button>

@@ -182,12 +182,12 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                     <LoaderIcon className="w-8 h-8 animate-spin" />
                     <div className="text-center space-y-2">
                         <h2 className="text-xl font-semibold">Verifying your email...</h2>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-muted-foreground">
                             Please wait while we verify your email address. This may take a few moments.
                         </p>
                         {isVerifyingEmail && !emailVerified && (
-                            <div className="p-4 bg-blue-50 border border-blue-200 rounded-md mt-4">
-                                <p className="text-sm text-blue-800">
+                            <div className="p-4 bg-muted border border-border rounded-md mt-4">
+                                <p className="text-sm text-foreground">
                                     If you don't see your email verified, you may need to:
                                     <ul className="list-disc list-inside mt-2">
                                         <li>Ensure your GitHub email is verified</li>
@@ -208,7 +208,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
             <div className="flex justify-center items-center mt-6 md:mt-18">
                 <div className="flex flex-col gap-4 w-full max-w-lg">
                     <h1 className="text-3xl font-bold">Welcome, {user.name}!</h1>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-muted-foreground">
                         Please review and accept the terms of service to generate your API key with enhanced privileges.
                     </p>
                     {!emailVerified && (
@@ -237,7 +237,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                             checked={tosAccepted}
                             onChange={(e) => setTosAccepted(e.target.checked)}
                         />
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-muted-foreground">
                             I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>Llama 3.1</a></u>, <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>Llama 3.2</a></u>, and <u><a href="https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/blob/main/LICENSE" target='_blank'>Llama 4</a></u> Community Licenses.
                         </p>
                     </div>
@@ -251,7 +251,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
             <div className="flex justify-center items-center mt-6 md:mt-18">
                 <div className="flex flex-col gap-4 w-full max-w-lg">
                     <h1 className="text-3xl font-bold">Ready to generate your API key</h1>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-muted-foreground">
                         You've accepted the terms of service. Click the button below to generate your API key with enhanced privileges.
                     </p>
                     {!emailVerified && (
@@ -276,7 +276,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                     <button
                         onClick={handleAuth0Submit}
                         disabled={loading || !emailVerified}
-                        className="p-2 bg-black text-white rounded-md hover:bg-white hover:text-black hover:border-black border border-black disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-2 bg-black text-white rounded-md hover:bg-white hover:text-black hover:border-border border border-border disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? <LoaderIcon className="w-6 h-6 justify-center mx-auto" /> : "GENERATE API KEY"}
                     </button>
@@ -289,7 +289,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
         <div className="flex justify-center items-center mt-2 md:mt-4">
             <form onSubmit={localHandleSubmit} className="flex flex-col gap-4 w-full max-w-lg">
                 <h1 className="text-3xl font-bold">Generate Your AkashChat API Key</h1>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-muted-foreground">
                     Choose how you'd like to access the AkashChat API. Both options are completely free.
                 </p>
 
@@ -316,7 +316,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                             
                             <div className="space-y-4">
                                 <div className="space-y-2">
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address *</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-foreground">Email Address *</label>
                                     <input
                                         id="email"
                                         name='email'
@@ -328,7 +328,7 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                                 </div>
                                 
                                 <div className="space-y-2">
-                                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">How will you use the API? (Optional)</label>
+                                    <label htmlFor="description" className="block text-sm font-medium text-foreground">How will you use the API? (Optional)</label>
                                     <textarea
                                         id="description"
                                         name='description'
@@ -350,10 +350,10 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                                         type="checkbox"
                                         id="email-consent"
                                         name="email-consent"
-                                        className="mt-1 h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
+                                        className="mt-1 h-4 w-4 text-foreground focus:ring-ring border-border rounded"
                                         required
                                     />
-                                    <label htmlFor="email-consent" className="text-sm text-gray-700">
+                                    <label htmlFor="email-consent" className="text-sm text-foreground">
                                         I agree to receive communications from Akash regarding service updates, security notices, API changes, marketing materials, and other commercial information. *
                                     </label>
                                 </div>
@@ -361,21 +361,21 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                                     <input
                                         type="checkbox"
                                         id="tos-permissionless"
-                                        className="mt-1 h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
+                                        className="mt-1 h-4 w-4 text-foreground focus:ring-ring border-border rounded"
                                         name='tos'
                                         required
                                     />
-                                    <label htmlFor="tos-permissionless" className="text-sm text-gray-700">
+                                    <label htmlFor="tos-permissionless" className="text-sm text-foreground">
                                         I agree to the <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>Llama 3.1</a></u>, <u><a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-405B-Instruct/blob/main/LICENSE" target='_blank'>Llama 3.2</a></u>, and <u><a href="https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8/blob/main/LICENSE" target='_blank'>Llama 4</a></u> Community Licenses. *
                                     </label>
                                 </div>
 
                                 <button
                                     type="submit"
-                                    className={`w-full p-3 rounded-lg border border-black transition-all duration-200 font-medium flex items-center justify-center gap-2 ${
+                                    className={`w-full p-3 rounded-lg border border-border transition-all duration-200 font-medium flex items-center justify-center gap-2 ${
                                         loading || !recaptchaValue
-                                            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                            : "bg-black text-white hover:bg-white hover:text-black cursor-pointer"
+                                            ? "bg-muted text-muted-foreground cursor-not-allowed"
+                                            : "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
                                     }`}
                                     disabled={loading || !recaptchaValue}
                                 >
@@ -390,19 +390,19 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                                 </button>
                             </div>
                         </div>
-                        <p className="text-xs text-gray-500 text-center">
+                        <p className="text-xs text-muted-foreground text-center">
                     * Required fields
                 </p>
                     </TabsContent>
 
                     <TabsContent value="auth0" className="min-h-[600px]">
                         <div className="space-y-6">
-                            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                                <h3 className="text-lg font-semibold mb-2 text-blue-800">Extended Access Benefits</h3>
-                                <p className="text-sm text-blue-700 mb-2">
+                            <div className="p-4 bg-muted rounded-lg border border-border">
+                                <h3 className="text-lg font-semibold mb-2 text-foreground">Extended Access Benefits</h3>
+                                <p className="text-sm text-muted-foreground mb-2">
                                     Sign up for enhanced features and better account management.
                                 </p>
-                                <ul className="space-y-1 text-sm text-blue-600">
+                                <ul className="space-y-1 text-sm text-muted-foreground">
                                     <li>• Account dashboard with API key management</li>
                                     <li>• Future premium features</li>
                                 </ul>
@@ -411,12 +411,12 @@ export default function GetKey({ handleSubmit }: { handleSubmit: (event: FormEve
                                 
                                 <a
                                     href="/api/auth/login?returnTo=%2Faccount"
-                                    className="w-full p-3 rounded-lg border border-black transition-all duration-200 flex items-center justify-center gap-2 font-medium bg-black text-white hover:bg-white hover:text-black cursor-pointer"
+                                    className="w-full p-3 rounded-lg border border-border transition-all duration-200 flex items-center justify-center gap-2 font-medium bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
                                 >
                                     Sign up with Extended Access
                                 </a>
                                 
-                                <p className="text-xs text-gray-500 text-center">
+                                <p className="text-xs text-muted-foreground text-center">
                                     Sign up using GitHub, Google, or other supported providers.
                                 </p>
                             </div>
