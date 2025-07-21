@@ -418,23 +418,23 @@ export default function AccountPage() {
 
         {/* Email Verification Warning for Auth0 Users */}
         {user.authType === 'auth0' && auth0User && auth0User.email_verified === false && (
-          <Card className="mb-8 border-amber-200 bg-amber-50">
+          <Card className="mb-8 border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-amber-800">
+              <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
                 <AlertTriangle className="w-5 h-5" />
                 Email Verification Required
               </CardTitle>
-              <CardDescription className="text-amber-700">
+              <CardDescription className="text-amber-700 dark:text-amber-300">
                 Verify your email address to enable API key management
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="p-4 border border-amber-200 rounded-lg">
-                  <p className="text-sm text-amber-800 mb-3">
+                <div className="p-4 border border-amber-200 rounded-lg dark:border-amber-900">
+                  <p className="text-sm text-amber-800 mb-3 dark:text-amber-200">
                     To ensure account security, please verify your email address before creating API keys.
                   </p>
-                  <ol className="text-sm text-amber-700 space-y-1 list-decimal list-inside mb-4">
+                  <ol className="text-sm text-amber-700 space-y-1 list-decimal list-inside mb-4 dark:text-amber-300">
                     <li>Check your inbox for a verification email from Auth0</li>
                     <li>Click the verification link to confirm your email address</li>
                     <li>Use the button below to refresh your session</li>
@@ -445,11 +445,11 @@ export default function AccountPage() {
                   <Button 
                     onClick={handleLogoutAndLogin}
                     variant="default"
-                    className="bg-amber-600 hover:bg-amber-700 text-white"
+                    className="bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-800 dark:hover:bg-amber-900"
                   >
                     Refresh Session
                   </Button>
-                  <p className="text-xs text-amber-600">
+                  <p className="text-xs text-amber-600 dark:text-amber-300">
                     Use after completing email verification
                   </p>
                 </div>
