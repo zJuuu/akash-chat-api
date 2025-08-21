@@ -12,14 +12,57 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AkashChat API",
+  title: {
+    default: "AkashChat API",
+    template: "%s | AkashChat API"
+  },
   description:
     "Build with the AkashChat API. Access the leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
+  keywords: [
+    "AkashChat",
+    "API",
+    "LLaMA",
+    "DeepSeek", 
+    "Qwen",
+    "AI models",
+    "Akash Network",
+    "free AI API",
+    "open source",
+    "machine learning",
+    "chatbot API",
+    "language models"
+  ],
+  authors: [{ name: "Akash Network" }],
+  creator: "Akash Network",
+  publisher: "Akash Network",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: "AkashChat API",
     description:
       "Build with the AkashChat API. Access the leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
     type: "website",
+    locale: "en_US",
+    siteName: "AkashChat API",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AkashChat API",
+    description:
+      "Access leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
+    creator: "@akashnet_",
+  },
+  alternates: {
+    canonical: "/",
   },
 }
 

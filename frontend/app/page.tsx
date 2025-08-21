@@ -141,8 +141,40 @@ export default function Index() {
     }
   }, []);
 
+  // Structured data
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebAPI",
+    "name": "AkashChat API",
+    "description": "Open and permissionless AI API powered by the Akash Supercloud providing access to leading open-source AI models like LLaMA and DeepSeek at zero cost.",
+    "url": "https://api.akash.network",
+    "provider": {
+      "@type": "Organization",
+      "name": "Akash Network",
+      "url": "https://akash.network"
+    },
+    "documentation": "https://api.akash.network/documentation",
+    "category": "AI/Machine Learning",
+    "isAccessibleForFree": true,
+    "potentialAction": {
+      "@type": "ConsumeAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://api.akash.network/documentation",
+        "actionPlatform": [
+          "https://schema.org/DesktopWebPlatform",
+          "https://schema.org/MobileWebPlatform"
+        ]
+      }
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {step === 0 && (
         <section className="w-full">
           <div className="container grid grid-cols-1 md:grid-cols-2 items-center gap-6 px-4 md:px-6 lg:gap-10">

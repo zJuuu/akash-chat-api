@@ -1,23 +1,17 @@
-"use client";
-
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python';
-import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash';
-import { Globe, ChartColumnIncreasing, ChartBarBig, Github, Copy, Check, ExternalLink, Book } from 'lucide-react';
-import Code from '@/components/code';
-import { useState } from 'react';
+import { Globe, ChartColumnIncreasing, ChartBarBig, Github, Book } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { exampleAxios, exampleCode, exampleCurl } from '../constants/codeExamples';
-import { models } from '../constants/models';
+import { getModelsData } from '@/lib/models-server';
+import CodeExamples from '@/components/documentation/CodeExamples';
+import ModelsList from '@/components/documentation/ModelsList';
+import TableOfContents from '@/components/documentation/TableOfContents';
 
-SyntaxHighlighter.registerLanguage('python', python);
-SyntaxHighlighter.registerLanguage('bash', bash);
+// ISR: Revalidate every 30 minutes (1800 seconds)
+export const revalidate = 1800;
 
-
-export default function Documentation() {
-  const [activeTab, setActiveTab] = useState<'python' | 'curl' | 'axios'>('python');
-  const [copiedModel, setCopiedModel] = useState<string | null>(null);
+export default async function Documentation() {
+  // Fetch models data server-side
+  const modelsData = await getModelsData();
 
   return (
     <div className="min-h-screen">
@@ -209,186 +203,16 @@ export default function Documentation() {
               </div>
             </section>
 
-            <section id="examples" className="mb-8 sm:mt-12">
-              <h2 className="text-xl font-medium mb-4">Examples</h2>
-              <div className="flex gap-2 mb-4">
-                <Button
-                  variant={activeTab === 'python' ? 'secondary' : 'ghost'}
-                  onClick={() => setActiveTab('python')}
-                  className={`h-8 px-4 text-sm rounded-full ${activeTab === 'python'
-                      ? 'text-foreground bg-muted'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                >
-                  Python & OpenAI
-                </Button>
-                <Button
-                  variant={activeTab === 'axios' ? 'secondary' : 'ghost'}
-                  onClick={() => setActiveTab('axios')}
-                  className={`h-8 px-4 text-sm rounded-full ${activeTab === 'axios'
-                      ? 'text-foreground bg-muted'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                >
-                  JavaScript
-                </Button>
-                <Button
-                  variant={activeTab === 'curl' ? 'secondary' : 'ghost'}
-                  onClick={() => setActiveTab('curl')}
-                  className={`h-8 px-4 text-sm rounded-full ${activeTab === 'curl'
-                      ? 'text-foreground bg-muted'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                >
-                  curl
-                </Button>
-              </div>
-              <div className="bg-[#18181B] rounded-lg overflow-hidden -mx-2 xs:-mx-4 sm:mx-0">
-                <div className="overflow-x-auto">
-                  <div className="min-w-[300px]">
-                    {activeTab === 'python' && (
-                      <Code code={exampleCode} />
-                    )}
-                    {activeTab === 'axios' && (
-                      <Code code={exampleAxios} />
-                    )}
-                    {activeTab === 'curl' && (
-                      <Code code={exampleCurl} />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </section>
+            <CodeExamples />
 
-            <section id="models" className="mt-8 sm:mt-12 -mx-2 xs:-mx-4 sm:mx-0">
-              <h2 className="text-xl font-medium mb-4 px-2 xs:px-4 sm:px-0">Available Models</h2>
-
-              {/* Chat + Completions Models */}
-              <div className="mb-8">
-                <h3 className="text-lg font-medium mb-3 px-2 xs:px-4 sm:px-0 text-gray-700">Chat + Completions</h3>
-                <div className="bg-card rounded-lg divide-y divide-gray-100 overflow-hidden">
-                  {models.map((model) => (
-                    <div key={model.model} className="p-3 xs:p-4 hover:bg-muted transition-colors">
-                      <div className="flex items-center justify-between gap-4 min-w-0">
-                        <div
-                          className="flex items-center gap-2 min-w-0 flex-1 cursor-pointer group"
-                          onClick={() => {
-                            navigator.clipboard.writeText(model.model);
-                            setCopiedModel(model.model);
-                            setTimeout(() => setCopiedModel(null), 1000);
-                          }}
-                        >
-                          <div className="relative">
-                            {copiedModel === model.model ? (
-                              <Check className="w-3.5 h-3.5 text-green-500 transition-all duration-200 ease-spring scale-125" />
-                            ) : (
-                              <Copy className="w-3.5 h-3.5 text-gray-400 group-hover:text-muted-foreground transition-colors" />
-                            )}
-                          </div>
-                          <code className="px-2 py-1 bg-muted rounded text-xs xs:text-sm font-mono text-muted-foreground break-all">
-                            {model.model}
-                          </code>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          asChild
-                          className="h-7 px-2 text-xs xs:text-sm font-light text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
-                        >
-                          <a
-                            href={model.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1"
-                          >
-                            <ExternalLink className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
-                            Model details
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Embedding Models */}
-              <div>
-                <h3 className="text-lg font-medium mb-3 px-2 xs:px-4 sm:px-0 text-gray-700">Embedding</h3>
-                <div className="bg-card rounded-lg divide-y divide-gray-100 overflow-hidden">
-                  {[
-                    { model: "BAAI-bge-large-en-v1-5", href: "https://huggingface.co/BAAI/bge-large-en-v1.5" },
-                  ].map((model) => (
-                    <div key={model.model} className="p-3 xs:p-4 hover:bg-muted transition-colors">
-                      <div className="flex items-center justify-between gap-4 min-w-0">
-                        <div
-                          className="flex items-center gap-2 min-w-0 flex-1 cursor-pointer group"
-                          onClick={() => {
-                            navigator.clipboard.writeText(model.model);
-                            setCopiedModel(model.model);
-                            setTimeout(() => setCopiedModel(null), 1000);
-                          }}
-                        >
-                          <div className="relative">
-                            {copiedModel === model.model ? (
-                              <Check className="w-3.5 h-3.5 text-green-500 transition-all duration-200 ease-spring scale-125" />
-                            ) : (
-                              <Copy className="w-3.5 h-3.5 text-gray-400 group-hover:text-muted-foreground transition-colors" />
-                            )}
-                          </div>
-                          <code className="px-2 py-1 bg-muted rounded text-xs xs:text-sm font-mono text-muted-foreground break-all">
-                            {model.model}
-                          </code>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          asChild
-                          className="h-7 px-2 text-xs xs:text-sm font-light text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
-                        >
-                          <a
-                            href={model.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1"
-                          >
-                            <ExternalLink className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
-                            Model details
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <ModelsList 
+              chatModels={modelsData.chatModels} 
+              embeddingModels={modelsData.embeddingModels} 
+            />
           </div>
 
           {/* Right Sidebar */}
-          <div className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-4">
-              <h3 className="text-muted-foreground uppercase text-xs font-regular mb-[5%]">On this page</h3>
-              <nav className="space-y-1">
-                {[
-                  { title: "Using the API", href: "#using-the-api" },
-                  { title: "Examples", href: "#examples" },
-                  { title: "Available Models", href: "#models" },
-                ].map((item) => (
-                  <Button
-                    key={item.title}
-                    variant="ghost"
-                    className="w-full justify-start gap-2 h-8 px-2 text-sm font-[400] text-muted-foreground hover:text-foreground hover:bg-muted"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const element = document.querySelector(item.href);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    <span>{item.title}</span>
-                  </Button>
-                ))}
-              </nav>
-            </div>
-          </div>
+          <TableOfContents />
         </div>
       </div>
     </div>
