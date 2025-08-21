@@ -8,4 +8,7 @@ export const models = [
     { model: "Meta-Llama-3-3-70B-Instruct", href: "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct" },
     { model: "Meta-Llama-4-Maverick-17B-128E-Instruct-FP8", href: "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8" },
     { model: "Qwen3-235B-A22B-Instruct-2507-FP8", href: "https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507-FP8" },
+    { model: "BAAI-bge-large-en-v1-5", href: "https://huggingface.co/BAAI/bge-large-en-v1.5" },
+    { model: "gpt-oss-120b", href: "https://huggingface.co/openai/gpt-oss-120b" },
+    { model: "Qwen3-Coder-480B-A35B-Instruct-FP8", href: "https://huggingface.co/Qwen/Qwen3-Coder-480B-A35B-Instruct" },
 ]
