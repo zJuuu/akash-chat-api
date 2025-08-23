@@ -10,6 +10,6 @@ export const models = [
     { model: "Qwen3-235B-A22B-Instruct-2507-FP8", href: "https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507-FP8" },
     { model: "BAAI-bge-large-en-v1-5", href: "https://huggingface.co/BAAI/bge-large-en-v1.5" },
     { model: "gpt-oss-120b", href: "https://huggingface.co/openai/gpt-oss-120b" },
-    { model: "Qwen3-Coder-480B-A35B-Instruct-FP8", href: "https://huggingface.co/Qwen/Qwen3-Coder-480B-A35B-Instruct" },
+    //{ model: "Qwen3-Coder-480B-A35B-Instruct-FP8", href: "https://huggingface.co/Qwen/Qwen3-Coder-480B-A35B-Instruct" },
     { model: "DeepSeek-V3-1", href: "https://huggingface.co/deepseek-ai/DeepSeek-V3.1" },
 ]
