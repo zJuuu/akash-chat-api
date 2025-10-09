@@ -863,7 +863,7 @@ export const generateApiKey = async (userId: string, keyName: string) => {
       "key_alias": uniqueKeyAlias, // Use unique key alias to avoid conflicts
       "key_name": keyName,
       "user_role": userInfo.user_role || process.env.LITELLM_USER_ROLE,
-      "max_parallel_requests": userInfo.max_parallel_requests || process.env.LITELLM_MAX_PARALLEL_REQUESTS,
+      "max_parallel_requests": process.env.LITELLM_MAX_PARALLEL_REQUESTS,
       "team_id": teamId,
       "teams": userInfo.teams || [teamId],
       "metadata": {
