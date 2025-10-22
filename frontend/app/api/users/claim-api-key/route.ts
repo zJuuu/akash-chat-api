@@ -42,6 +42,20 @@ export async function POST(req: NextRequest) {
   log.info('API key claim request started', { requestId });
   
   try {
+    // Check if we're past the migration deadline
+    const migrationDeadline = new Date('2025-10-31T23:59:59Z');
+    if (new Date() > migrationDeadline) {
+      log.warn('Account creation blocked - past migration deadline', { requestId });
+      return new NextResponse(JSON.stringify({ 
+        message: 'AkashChat API has migrated to AkashML. New account creation is no longer available. Please visit akashml.com for the new platform.' 
+      }), {
+        status: 410, // Gone
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
     const body = await req.json();
     const { email, name, description, acceptToS, acceptCommunications, authType } = body;
     

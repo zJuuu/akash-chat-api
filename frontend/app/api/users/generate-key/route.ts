@@ -88,6 +88,20 @@ export async function POST(req: NextRequest) {
   log.info('New API key generation request started', { requestId });
   
   try {
+    // Check if we're past the migration deadline
+    const migrationDeadline = new Date('2025-10-31T23:59:59Z');
+    if (new Date() > migrationDeadline) {
+      log.warn('Key generation blocked - past migration deadline', { requestId });
+      return new NextResponse(JSON.stringify({ 
+        message: 'AkashChat API has migrated to AkashML. New key generation is no longer available. Please visit akashml.com for the new platform.' 
+      }), {
+        status: 410, // Gone
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
     const { user, auth0Session } = await getCurrentUser(req);
     
     if (!user) {

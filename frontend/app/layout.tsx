@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
+import DiscontinuationBanner from "@/components/discontinuation-banner"
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Auth0Provider } from "@/components/providers/Auth0Provider"
 import { UserProvider } from "@/components/providers/UserProvider"
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
               <UserProvider>
                 <div className="flex flex-col justify-between w-full h-full min-h-screen">
                   <Header />
+                  <DiscontinuationBanner />
                   <main className="flex flex-col items-center justify-center flex-1 p-4">
                     {children}
                   </main>
