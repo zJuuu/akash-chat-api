@@ -310,7 +310,8 @@ export const getUserByAuth0Id = async (auth0UserId: string, auth0Email?: string,
     log.debug('Raw LiteLLM response for getUserByAuth0Id', { 
       auth0UserId,
       responseKeys: Object.keys(userData),
-      userData: JSON.stringify(userData, null, 2)
+      userId: userData.user_id,
+      hasUserInfo: !!userData.user_info
     });
     
     // The response structure shows user_id at the top level, not in user_info
@@ -412,7 +413,8 @@ export const getUserByEmail = async (email: string) => {
     log.debug('Raw LiteLLM response for getUserByEmail', { 
       email,
       responseKeys: Object.keys(userData),
-      userData: JSON.stringify(userData, null, 2)
+      userId: userData.user_id,
+      hasUserInfo: !!userData.user_info
     });
     
     const userInfo = userData.user_info || userData; // Handle both new and old response formats
@@ -491,13 +493,32 @@ export const createUser = async (
       "auto_create_key": true
     };
 
-    // For permissionless users, add 5-day expiration to the key
+    // For permissionless users, add expiration to the key
     if (authType === 'non-auth0') {
-      requestBody.duration = "5d"; // 5 days duration
+      // Set via environment variable or use default
+      const envExpirationDate = process.env.API_KEY_EXPIRATION_DATE 
+        ? new Date(process.env.API_KEY_EXPIRATION_DATE)
+        : null;
       
-      log.info('Setting 5-day duration for permissionless user key', { 
+      // Default: 30 days from now
+      const defaultExpirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+      
+      // Use the more restrictive (earlier) expiration date
+      const expirationDate = envExpirationDate && envExpirationDate < defaultExpirationDate
+        ? envExpirationDate
+        : defaultExpirationDate;
+      
+      // Calculate duration in seconds from now until expiration
+      const durationSeconds = Math.floor((expirationDate.getTime() - Date.now()) / 1000);
+      const durationString = `${durationSeconds}s`;
+      
+      requestBody.duration = durationString;
+      
+      log.info('Setting expiration for permissionless user key', { 
         email,
-        duration: "5d"
+        duration: durationString,
+        expiresAt: expirationDate.toISOString(),
+        usingEnvVariable: !!envExpirationDate && envExpirationDate < defaultExpirationDate
       });
     }
 
@@ -647,8 +668,7 @@ export const getUserInfoWithKeys = async (userId: string) => {
       responseKeys: Object.keys(userData),
       hasUserInfo: !!(userData.user_info || userData.user_id),
       hasKeys: !!(userData.keys),
-      keyCount: userData.keys ? userData.keys.length : 0,
-      rawUserData: JSON.stringify(userData, null, 2)
+      keyCount: userData.keys ? userData.keys.length : 0
     });
     
     const userInfo = userData.user_info || userData;
@@ -873,16 +893,39 @@ export const generateApiKey = async (userId: string, keyName: string) => {
       }
     };
 
-    // For permissionless users, add 5-day expiration to the key
-    if (authType === 'non-auth0') {
-      requestBody.duration = "5d"; // 5 days duration
+    // For permissionless users, add expiration to the key
+      // Set via environment variable or use default
+      const envExpirationDate = process.env.API_KEY_EXPIRATION_DATE 
+        ? new Date(process.env.API_KEY_EXPIRATION_DATE)
+        : null;
       
-      log.info('Setting 5-day duration for permissionless user key', { 
+      let defaultExpirationDateNumber = 30;
+
+      if (authType === 'non-auth0') {
+        defaultExpirationDateNumber = 5;
+      }
+      const defaultExpirationDate = new Date(Date.now() + defaultExpirationDateNumber * 24 * 60 * 60 * 1000);
+      
+      // Use the more restrictive (earlier) expiration date
+      const expirationDate = envExpirationDate && envExpirationDate < defaultExpirationDate
+        ? envExpirationDate
+        : defaultExpirationDate;
+
+      console.log('expirationDate', expirationDate.toISOString());
+      
+      // Calculate duration in seconds from now until expiration
+      const durationSeconds = Math.floor((expirationDate.getTime() - Date.now()) / 1000);
+      const durationString = `${durationSeconds}s`;
+      
+      requestBody.duration = durationString;
+      
+      log.info('Setting expiration for permissionless user key', { 
         userId,
         keyName,
-        duration: "5d"
+        duration: durationString,
+        expiresAt: expirationDate.toISOString(),
+        usingEnvVariable: !!envExpirationDate && envExpirationDate < defaultExpirationDate
       });
-    }
     
     log.debug('Generating API key with request body', { userId, requestBody });
     
