@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           <ThemeToggle variant="footer" />
-          <Link href="https://twitter.com/akashnet_" className="hover:underline">
+          <Link href="https://twitter.com/akashnet" className="hover:underline">
             <XIcon className="h-5 w-5 text-zinc-400 hover:text-white transition-colors" />
           </Link>
           <Link href="https://github.com/akash-network" className="hover:underline">

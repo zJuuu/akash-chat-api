@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     title: "AkashChat API",
     description:
       "Access leading open-source AI models powered by the Akash Supercloud, completely free for developers.",
-    creator: "@akashnet_",
+    creator: "@akashnet",
   },
   alternates: {
     canonical: "/",
