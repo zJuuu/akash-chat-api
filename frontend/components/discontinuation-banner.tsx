@@ -10,7 +10,7 @@ export default function DiscontinuationBanner() {
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <div className="text-center">
             <p className="text-sm md:text-base font-semibold text-white">
-              Important Notice: AkashChat API is migrating to AkashML on October 31, 2025
+              Important Notice: AkashChat API is migrating to AkashML on November 21, 2025
             </p>
             <p className="text-xs md:text-sm text-white/90 mt-1">
               Please prepare to migrate your applications to the new AkashML platform.{" "}
