@@ -66,10 +66,6 @@ export async function GET(req: NextRequest) {
       LITELLM_ADMIN_KEY: !!process.env.LITELLM_ADMIN_KEY,
       LITELLM_USER_ROLE: !!process.env.LITELLM_USER_ROLE,
       LITELLM_TEAM_ID: !!process.env.LITELLM_TEAM_ID,
-      LITELLM_TEAM_AUTH0: !!process.env.LITELLM_TEAM_AUTH0,
-      LITELLM_TEAM_PERMISSIONLESS: !!process.env.LITELLM_TEAM_PERMISSIONLESS,
-      RECAPTCHA_SECRET_KEY: !!process.env.RECAPTCHA_SECRET_KEY,
-      AUTH0_SECRET: !!process.env.AUTH0_SECRET,
       REDIS_HOST: !!process.env.REDIS_HOST,
       REDIS_PORT: !!process.env.REDIS_PORT
     };

@@ -5,8 +5,6 @@ import Footer from "@/components/footer"
 import Header from "@/components/header"
 import DiscontinuationBanner from "@/components/discontinuation-banner"
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { Auth0Provider } from "@/components/providers/Auth0Provider"
-import { UserProvider } from "@/components/providers/UserProvider"
 import { ErrorBoundary } from "@/components/providers/ErrorBoundary"
 import { ThemeProvider } from "@/components/providers/ThemeProvider"
 
@@ -78,18 +76,14 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           disableTransitionOnChange
         >
           <ErrorBoundary>
-            <Auth0Provider>
-              <UserProvider>
-                <div className="flex flex-col justify-between w-full h-full min-h-screen">
-                  <Header />
-                  <DiscontinuationBanner />
-                  <main className="flex flex-col items-center justify-center flex-1 p-4">
-                    {children}
-                  </main>
-                </div>
-                <Footer />
-              </UserProvider>
-            </Auth0Provider>
+            <div className="flex flex-col justify-between w-full h-full min-h-screen">
+              <Header />
+              <DiscontinuationBanner />
+              <main className="flex flex-col items-center justify-center flex-1 p-4">
+                {children}
+              </main>
+            </div>
+            <Footer />
           </ErrorBoundary>
         </ThemeProvider>
       </body>
